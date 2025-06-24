@@ -5,7 +5,8 @@ export default {
     extend: {
       fontFamily: {
         delius: ['Delius', 'cursive'],
-        poppins: ['Poppins', 'sans-serif'],
+        raleway: ['Raleway', 'sans-serif'],
+       
       },
     },
   },

@@ -6,7 +6,6 @@ const Home = () => {
     return (
         <div className="p-6 space-y-4">
       <h1 className="text-3xl font-delius">This is Delius fontW</h1>
-      <h2 className="text-2xl font-raleway">This is Raleway fontW</h2>
     </div>
     );
 };

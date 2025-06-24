@@ -1,21 +1,22 @@
+
 @import "tailwindcss";
 @plugin "daisyui";
 @font-face {
   font-family: 'Delius';
   src: url('./Fonts/Delius-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('./Fonts/Raleway-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'Raleway';
+  src: url('./Fonts/Raleway-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 900; /* For variable font */
 }
 
+/* Set Raleway as default font */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

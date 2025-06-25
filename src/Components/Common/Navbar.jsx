@@ -1,13 +1,43 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import logo from "/Logo.png";
 
 const Navbar = () => {
-
-    const links = <>
-        <NavLink to={"/"} className={({ isActive }) => isActive ? "active" : "default"}>Home</NavLink>
-        <NavLink to={"/allFoods"} className={({ isActive }) => isActive ? "active" : "default"}>All Foods</NavLink>
-        <NavLink to={"/gallery"} className={({ isActive }) => isActive ? "active" : "default"}>Gallery</NavLink>
+  // Active class color is in index.css
+  const links = (
+    <>
+      <NavLink
+        to={"/"}
+        className={({ isActive }) =>
+          isActive
+            ? "active text-[#a86c6c] font-medium"
+            : "default hover:text-[#a86c6c] hover:scale-105 transition-all"
+        }
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to={"/allFoods"}
+        className={({ isActive }) =>
+          isActive
+            ? "active text-[#a86c6c] font-medium"
+            : "default hover:text-[#a86c6c] hover:scale-105 transition-all"
+        }
+      >
+        All Foods
+      </NavLink>
+      <NavLink
+        to={"/gallery"}
+        className={({ isActive }) =>
+          isActive
+            ? "active text-[#a86c6c] font-medium"
+            : "default hover:text-[#a86c6c] hover:scale-105 transition-all"
+        }
+      >
+        Gallery
+      </NavLink>
     </>
+  );
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -37,15 +67,16 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link to="/">
+          <img src={logo} alt="CakeyKitchen" className="w-[80px] " />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-5">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1 gap-5 text-[20px]">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end gap-5">
+        <Link to="/login"><button className="btn">Login</button></Link>
+        <Link to="/register"><button className="btn">SignUp</button></Link>
       </div>
     </div>
   );

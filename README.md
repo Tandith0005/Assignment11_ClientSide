@@ -4,4 +4,5 @@ We used:
 2. React-router-dom (We are operating our routes from Routes.jsx)
 3. Tailwind with Daisy Ui
 4. react-password-checklist to validate Password
+5. React Icons
 

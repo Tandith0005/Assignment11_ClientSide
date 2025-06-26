@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
 import logo from "/Logo.png";
+import { IoMdSettings } from "react-icons/io";
 
 const Navbar = () => {
   // Active class color is in index.css
@@ -40,7 +41,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-[#d7837f] shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -75,8 +76,25 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 gap-5 text-[20px]">{links}</ul>
       </div>
       <div className="navbar-end gap-5">
-        <Link to="/login"><button className="btn">Login</button></Link>
-        <Link to="/register"><button className="btn">SignUp</button></Link>
+        <Link to="/login">
+          <button className="btn">Login</button>
+        </Link>
+        <Link to="/register">
+          <button className="btn">SignUp</button>
+        </Link>
+
+{/* Profile Dropdown */}
+        <details className="dropdown dropdown-end">
+          <summary className="btn m-1">
+            <IoMdSettings />
+          </summary>
+          <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-[100px]  p-2 shadow-sm gap-4">
+            <Link to={"/myFoods"}>My Foods</Link>
+            <Link to={"/addFood"}>Add Food</Link>
+            <Link to={"/myOrders"}>My Orders</Link>
+            <Link to={"/logout"}>Logout</Link>
+          </ul>
+        </details>
       </div>
     </div>
   );

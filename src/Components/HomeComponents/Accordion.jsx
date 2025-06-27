@@ -3,10 +3,11 @@ import React from "react";
 const Accordion = () => {
   return (
     <div className="space-y-4 my-8 ">
+        <h1 className="text-center text-[#cc3366] font-bold font-raleway text-[30px] md:text-[40px] mb-10">Frequently Asked Questions</h1>
       {/* Operating Hours */}
       <div className="collapse collapse-plus bg-[#d7837f] border border-[#e07196]">
         <input type="radio" name="my-accordion-3" defaultChecked />
-        <div className="collapse-title font-semibold text-[#cc3366]">
+        <div className="collapse-title font-semibold text-[#cc3366] font-raleway ">
           What are your operating hours?
         </div>
         <div className="collapse-content text-sm ">
@@ -22,7 +23,7 @@ const Accordion = () => {
       {/* Dietary Options */}
       <div className="collapse collapse-plus bg-[#d7837f] border border-[#e07196]">
         <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title font-semibold text-[#cc3366]">
+        <div className="collapse-title font-semibold text-[#cc3366] font-raleway">
           Do you offer gluten-free or vegan options?
         </div>
         <div className="collapse-content text-sm">
@@ -35,7 +36,7 @@ const Accordion = () => {
       {/* Reservations */}
       <div className="collapse collapse-plus bg-[#d7837f] border border-[#e07196]">
         <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title font-semibold text-[#cc3366]">
+        <div className="collapse-title font-semibold text-[#cc3366] font-raleway">
           Do I need a reservation?
         </div>
         <div className="collapse-content text-sm">
@@ -48,7 +49,7 @@ const Accordion = () => {
       {/* Custom Orders */}
       <div className="collapse collapse-plus bg-[#d7837f] border border-[#e07196]">
         <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title font-semibold text-[#cc3366]">
+        <div className="collapse-title font-semibold text-[#cc3366] font-raleway">
           Can I place a custom cake order?
         </div>
         <div className="collapse-content text-sm">
@@ -61,7 +62,7 @@ const Accordion = () => {
       {/* Delivery */}
       <div className="collapse collapse-plus bg-[#d7837f] border border-[#e07196]">
         <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title font-semibold text-[#cc3366]">
+        <div className="collapse-title font-semibold text-[#cc3366] font-raleway">
           Do you offer delivery?
         </div>
         <div className="collapse-content text-sm">
@@ -74,7 +75,7 @@ const Accordion = () => {
       {/* Allergens */}
       <div className="collapse collapse-plus bg-[#d7837f] border border-[#e07196]">
         <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title font-semibold text-[#cc3366]">
+        <div className="collapse-title font-semibold text-[#cc3366] font-raleway">
           How do you handle food allergies?
         </div>
         <div className="collapse-content text-sm">

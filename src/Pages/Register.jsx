@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import ReactPasswordChecklist from "react-password-checklist";
-import { Link } from "react-router-dom"; // Changed from react-router to react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Changed from react-router to react-router-dom
+import UseAuth from "../Hooks/UseAuth";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const { createUser } = UseAuth();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const navigate = useNavigate()
+
   useEffect(() => {
     if (error) {
       window.scrollTo({
         top: 0,
-        behavior: "smooth"})
+        behavior: "smooth",
+      });
     }
   }, [error]);
 
@@ -25,14 +31,45 @@ const Register = () => {
     // Get data from Form
     const formData = new FormData(e.target);
     const formDataObject = Object.fromEntries(formData);
-    console.log(formDataObject);
+    const { name, email, password, profileImg } = formDataObject;
+
+    console.log(email,password, name, profileImg);
     
-    // Here you would typically send the data to your backend
-    setError(''); 
+    // Here you would typically send the data to your Firebase
+    createUser(email, password)
+      .then(() => {
+        // Signed up
+        
+        Swal.fire({
+          title: "Registration Successful!!!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate('/')
+
+        // Send name to backend here
+
+
+
+
+
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: errorCode,
+          text: errorMessage,
+        });
+        console.log(errorMessage);
+      });
+      
+    setError("");
   };
 
   return (
-    <div className="flex items-center justify-center bg-base-200 p-4">
+    <div className="flex items-center justify-center p-4">
       <div className="card w-full max-w-md shadow-2xl bg-base-100">
         <div className="card-body">
           <h2 className="card-title text-3xl font-bold text-center font-raleway">
@@ -42,9 +79,9 @@ const Register = () => {
             Please enter your credentials to Register
           </p>
 
-          {error && <div className="alert alert-error mb-4">{error}</div> }
+          {error && <div className="alert alert-error mb-4">{error}</div>}
 
-          <form onSubmit={handleSubmit} >
+          <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label" htmlFor="name">
                 <span className="label-text">Name</span>
@@ -53,6 +90,18 @@ const Register = () => {
                 type="text" // Changed from "name" to "text"
                 name="name"
                 placeholder="Enter your name"
+                className="input input-bordered w-full mb-4"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label" htmlFor="name">
+                <span className="label-text">Profile Image URL</span>
+              </label>
+              <input
+                type="text"
+                name="profileImg"
+                placeholder="Enter your Profile Image URL"
                 className="input input-bordered w-full mb-4"
                 required
               />

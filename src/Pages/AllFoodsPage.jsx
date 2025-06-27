@@ -1,25 +1,21 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
+import React, { useEffect } from "react";
+import { useLoaderData } from "react-router";
 
-const TopFoods = () => {
-  const [allData, setAllData] = useState([]);
+const AllFoodsPage = () => {
 
-  // Move axios call to useEffect to handle data fetching properly
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/topFoods`)
-      .then((res) => setAllData(res.data))
-      .catch((err) => console.error("Error fetching data:", err));
-  }, []);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    },[])
+  const allData = useLoaderData();
 
   return (
-    <div>
-      <div className="text-3xl md:text-4xl text-[#cc3366] text-center my-10 font-raleway font-semibold">
-        Top Food Section
+    <div className="min-h-screen ">
+      <div className="text-4xl text-center my-10 font-raleway font-semibold text-[#cc3366]">
+        All Foods Section
       </div>
+
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
           {allData.map((item) => (
             <div
               key={item._id}
@@ -95,27 +91,16 @@ const TopFoods = () => {
                 </div>
 
                 {/* Add to Cart Button */}
-                <button className="w-full bg-[#cc3366] hover:bg-[#b52d5a] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto">
-                  {" "}
-                  {/* Added mt-auto */}
+                <button className="w-full bg-[#cc3366] hover:bg-[#b52d5a] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto">
                   Add to Cart
                 </button>
               </div>
             </div>
           ))}
         </div>
-
-        {/* All Foods Button */}
-        <div className="text-center mb-10 mt-20">
-          <Link to={`allFoods`}>
-            <button className="bg-linear-65 from-[#b52d5a] via-pink-400 to-[#b52d5a] font-raleway  font-semibold py-2 px-4 rounded-lg">
-            View All Foods
-          </button>
-          </Link>
-        </div>
       </div>
     </div>
   );
 };
 
-export default TopFoods;
+export default AllFoodsPage;

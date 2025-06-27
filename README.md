@@ -5,4 +5,8 @@ We used:
 3. Tailwind with Daisy Ui
 4. react-password-checklist to validate Password
 5. React Icons
+6. Firebase Authentication
+7. Sweet Alert 2
+-------------------------------------------------------------------------------------------------------------------------------
+1. In Home Page: We have a hero section and we used react motion to make this heart shapes moving, then we have frequently asked questions which is done by daisy ui accordion and blogs finally  footer
 

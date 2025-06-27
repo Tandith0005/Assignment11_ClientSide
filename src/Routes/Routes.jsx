@@ -3,6 +3,7 @@ import App from "../App.jsx";
 import Home from "../Pages/Home.jsx";
 import Login from "../Pages/Login.jsx";
 import Register from "../Pages/Register.jsx";
+import AllFoodsPage from "../Pages/AllFoodsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/allFoods",
-        element: <h1>All Foods</h1>,
+        element: <AllFoodsPage></AllFoodsPage>,
+        loader: ()=> fetch(`http://localhost:5000/allFoods`)
       },
       {
         path: "/gallery",

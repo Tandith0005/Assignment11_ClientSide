@@ -1,12 +1,34 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import logo from "/Logo.png";
-import { IoMdSettings } from "react-icons/io";
+import catProfilePic from "../../assets/Images/CatProfilePic.jpg";
+import UseAuth from "../../Hooks/UseAuth";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase.config";
+import Swal from "sweetalert2";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Navbar = () => {
-  // Active class color is in index.css
+  const { user, loading } = UseAuth();
+  const navigate = useNavigate();
+
+  // Handle Logout
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        Swal.fire({
+          title: "Logout Successfully!!!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+  };
+
   const links = (
     <>
+      {/* Active class color is in index.css */}
       <NavLink
         to={"/"}
         className={({ isActive }) =>
@@ -41,7 +63,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-[#d7837f] shadow-sm">
+    <div className="navbar bg-[#d7837f] shadow-sm rounded-full">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -75,26 +97,46 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-5 text-[20px]">{links}</ul>
       </div>
+{/* NavEnd */}
+{/* First it checks if the user is logged in if not it shows the login button and before that it checks if the user is loading or not */}
       <div className="navbar-end gap-5">
-        <Link to="/login">
-          <button className="btn">Login</button>
-        </Link>
-        <Link to="/register">
-          <button className="btn">SignUp</button>
-        </Link>
-
-{/* Profile Dropdown */}
-        <details className="dropdown dropdown-end">
-          <summary className="btn m-1">
-            <IoMdSettings />
-          </summary>
-          <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-[100px]  p-2 shadow-sm gap-4">
-            <Link to={"/myFoods"}>My Foods</Link>
-            <Link to={"/addFood"}>Add Food</Link>
-            <Link to={"/myOrders"}>My Orders</Link>
-            <Link to={"/logout"}>Logout</Link>
-          </ul>
-        </details>
+        {loading ? (
+          <>
+            {" "}
+            <LoadingSpinner></LoadingSpinner>
+          </>
+        ) : (
+          <>
+            {user ? (
+              <>
+                <details className="dropdown dropdown-end">
+                  <summary className="list-none">
+                    <img
+                      src={user?.photoURL || catProfilePic}
+                      className="w-[70px] rounded-full cursor-pointer"
+                      alt="Profile"
+                    />
+                  </summary>
+                  <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-[100px]  p-2 shadow-sm gap-4">
+                    <Link to={"/myFoods"}>My Foods</Link>
+                    <Link to={"/addFood"}>Add Food</Link>
+                    <Link to={"/myOrders"}>My Orders</Link>
+                    <Link onClick={handleLogout}>Logout</Link>
+                  </ul>
+                </details>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <button className="btn">Login</button>
+                </Link>
+                <Link to="/register">
+                  <button className="btn">SignUp</button>
+                </Link>
+              </>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

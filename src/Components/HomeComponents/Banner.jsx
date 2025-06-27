@@ -64,11 +64,11 @@ const Banner = () => {
             </div>
           </div>
           
-          <div>
-            <h1 className="text-[25px] md:text-5xl text-[#cc3366]">
+          <div className='text-[#cc3366]'>
+            <h1 className="text-[25px] md:text-5xl ">
               Welcome to Cakey's Twisted Bakery
             </h1>
-            <p className="py-6 text-[#cc3366]">
+            <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.

@@ -4,6 +4,7 @@ import Home from "../Pages/Home.jsx";
 import Login from "../Pages/Login.jsx";
 import Register from "../Pages/Register.jsx";
 import AllFoodsPage from "../Pages/AllFoodsPage.jsx";
+import SingleFoodPage from "../Pages/SingleFoodPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
       {
         path: "/allFoods",
         element: <AllFoodsPage></AllFoodsPage>,
-        loader: ()=> fetch(`http://localhost:5000/allFoods`)
+      },
+      {
+        path: "/allFoods/:id",
+        element: <SingleFoodPage></SingleFoodPage>,
+        // loder goes here
       },
       {
         path: "/gallery",

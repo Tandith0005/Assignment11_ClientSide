@@ -1,12 +1,35 @@
-import React, { useEffect } from "react";
-import { useLoaderData } from "react-router";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllFoodsPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const [allFoods, setAllFoods] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
+  // Get data from backend of all foods
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/allFoods?page=${currentPage}&limit=${itemsPerPage}`)
+      .then((res) => {
+        setAllFoods(res.data.foods);
+        setTotalItems(res.data.totalItems);
+      })
+      .catch((err) => console.error("Error fetching data from backend:", err));
+  }, [currentPage,itemsPerPage]);
+  // Generate total page numbers
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  // Make array of page numbers
+  const pageNumber = [...Array(totalPages).keys()];
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    },[])
-  const allData = useLoaderData();
+  const handleItemsPerPage = (e) => {
+    const value = parseInt(e.target.value);
+    setItemsPerPage(value);
+    setCurrentPage(0);
+  };
 
   return (
     <div className="min-h-screen ">
@@ -16,7 +39,7 @@ const AllFoodsPage = () => {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
-          {allData.map((item) => (
+          {allFoods.map((item) => (
             <div
               key={item._id}
               className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
@@ -90,14 +113,66 @@ const AllFoodsPage = () => {
                   </div>
                 </div>
 
-                {/* Add to Cart Button */}
-                <button className="w-full bg-[#cc3366] hover:bg-[#b52d5a] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto">
-                  Add to Cart
-                </button>
+                {/* Show Details Button */}
+                <Link to={`/allFoods/${item._id}`} className="mt-auto">
+                  <button className="w-full bg-[#cc3366] hover:bg-[#b52d5a] font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                    Show Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
         </div>
+      </div>
+      {/* Pagination */}
+      <div className="text-center">
+        <button
+          className={
+            currentPage === 0
+              ? "disabled w-20"
+              : "btn bg-[#cc3366] border border-none w-20"
+          }
+          onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 0}
+        >
+          Previous
+        </button>
+        {pageNumber.map((page) => (
+          <button
+            key={page}
+            className={
+              currentPage === page
+                ? "btn mx-2 border-none bg-[#ff00dd] font-raleway font-semibold py-2 px-4 rounded-lg"
+                : "btn mx-2 border-none bg-[#cc3366]  font-raleway font-semibold py-2 px-4 rounded-lg"
+            }
+            onClick={() => setCurrentPage(page)}
+          >
+            {page}
+          </button>
+        ))}
+        <button
+          className={
+            currentPage === totalPages - 1
+              ? "disabled w-20"
+              : "btn bg-[#cc3366] border border-none w-20"
+          }
+          onClick={() =>
+            currentPage < totalPages - 1 && setCurrentPage(currentPage + 1)
+          }
+          disabled={currentPage === totalPages - 1}
+        >
+          Next
+        </button>
+        <select
+          onChange={handleItemsPerPage}
+          name="page"
+          className="text-[#cc3366] font-semibold font-raleway border border-[#cc3366]"
+        >
+          <option value="10">10</option>
+          <option value="5">5</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
       </div>
     </div>
   );

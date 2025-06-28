@@ -7,6 +7,10 @@ We used:
 5. React Icons
 6. Firebase Authentication
 7. Sweet Alert 2
+8. Axios
 -------------------------------------------------------------------------------------------------------------------------------
 1. In Home Page: We have a hero section and we used react motion to make this heart shapes moving, then we have frequently asked questions which is done by daisy ui accordion and blogs finally  footer
+
+
+2. In All Foods Page: We fetched data with axios from backend and showed with daisyUi cards
 

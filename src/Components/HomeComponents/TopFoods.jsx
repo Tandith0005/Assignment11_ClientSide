@@ -94,12 +94,12 @@ const TopFoods = () => {
                   </div>
                 </div>
 
-                {/* Add to Cart Button */}
-                <button className="w-full bg-[#cc3366] hover:bg-[#b52d5a] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto">
-                  {" "}
-                  {/* Added mt-auto */}
-                  Add to Cart
-                </button>
+                {/* Show Details Button */}
+                <Link to={`/allFoods/${item._id}`} className="mt-auto">
+                  <button className="w-full bg-[#cc3366] hover:bg-[#b52d5a] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                    Show Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -109,8 +109,8 @@ const TopFoods = () => {
         <div className="text-center mb-10 mt-20">
           <Link to={`allFoods`}>
             <button className="bg-linear-65 from-[#b52d5a] via-pink-400 to-[#b52d5a] font-raleway  font-semibold py-2 px-4 rounded-lg">
-            View All Foods
-          </button>
+              View All Foods
+            </button>
           </Link>
         </div>
       </div>

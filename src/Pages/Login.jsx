@@ -5,7 +5,7 @@ import UseAuth from "../Hooks/UseAuth";
 import Swal from "sweetalert2";
 
 const Login = () => {
-    const { signInUser,signInWithGoogle  } = UseAuth();
+    const { signInUser,signInWithGoogle, jwtToken  } = UseAuth();
     const navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -25,6 +25,11 @@ const Login = () => {
           icon: "success",
           draggable: true,
         });
+
+        // Send name to backend here
+        const user = {email : email}
+        jwtToken(user)
+
         navigate('/')
       })
       .catch((error) => {

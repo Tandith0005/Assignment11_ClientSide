@@ -1,3 +1,5 @@
+assignment requirements Link: https://docs.google.com/document/d/1uEgHkD_JYRarEMpMih0D8Od_g6OgCXW1by4bceeQbgg/edit?tab=t.0#heading=h.wqpf73v57bhn
+
 Hello, This is client side of Assignment 11. And in this readMe I will tell you what we did in client side. First of all let's talk about packages we used here:
 We used: 
 1. Vite

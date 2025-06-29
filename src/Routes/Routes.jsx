@@ -5,6 +5,7 @@ import Login from "../Pages/Login.jsx";
 import Register from "../Pages/Register.jsx";
 import AllFoodsPage from "../Pages/AllFoodsPage.jsx";
 import SingleFoodPage from "../Pages/SingleFoodPage.jsx";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/allFoods/:id",
         element: <SingleFoodPage></SingleFoodPage>,
-        // loder goes here
+        loader: async ({ params }) => {
+          const response = await axios.get(`http://localhost:5000/allFoods/${params.id}`);
+          return response.data; 
+        },
       },
       {
         path: "/gallery",

@@ -1,15 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import UseAuth from "../Hooks/UseAuth";
 
 const AllFoodsPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   const [allFoods, setAllFoods] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(12);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentPage = parseInt(searchParams.get('page')) || 0;
+  const itemsPerPage = parseInt(searchParams.get('limit')) || 12;
   // Get data from backend of all foods
   useEffect(() => {
     axios
@@ -27,8 +28,10 @@ const AllFoodsPage = () => {
 
   const handleItemsPerPage = (e) => {
     const value = parseInt(e.target.value);
-    setItemsPerPage(value);
-    setCurrentPage(0);
+    setSearchParams({ page: 0, limit: value });
+  };
+  const goToPage = (page) => {
+    setSearchParams({ page, limit: itemsPerPage });
   };
 
   return (
@@ -132,7 +135,7 @@ const AllFoodsPage = () => {
               ? "disabled w-20"
               : "btn bg-[#cc3366] border border-none w-20"
           }
-          onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
+          onClick={() => currentPage > 0 && goToPage(currentPage - 1)}
           disabled={currentPage === 0}
         >
           Previous
@@ -145,7 +148,7 @@ const AllFoodsPage = () => {
                 ? "btn mx-2 border-none bg-[#ff00dd] font-raleway font-semibold py-2 px-4 rounded-lg"
                 : "btn mx-2 border-none bg-[#cc3366]  font-raleway font-semibold py-2 px-4 rounded-lg"
             }
-            onClick={() => setCurrentPage(page)}
+            onClick={() => goToPage(page)}
           >
             {page}
           </button>
@@ -157,7 +160,7 @@ const AllFoodsPage = () => {
               : "btn bg-[#cc3366] border border-none w-20"
           }
           onClick={() =>
-            currentPage < totalPages - 1 && setCurrentPage(currentPage + 1)
+            currentPage < totalPages - 1 && goToPage(currentPage + 1)
           }
           disabled={currentPage === totalPages - 1}
         >
@@ -168,7 +171,7 @@ const AllFoodsPage = () => {
           name="page"
           className="text-[#cc3366] font-semibold font-raleway border border-[#cc3366]"
         >
-          <option value="10">10</option>
+          <option value="12">12</option>
           <option value="5">5</option>
           <option value="20">20</option>
           <option value="50">50</option>
